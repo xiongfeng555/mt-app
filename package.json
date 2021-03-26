@@ -1,0 +1,29 @@
+{
+  "name": "mt4-app",
+  "version": "1.0.0",
+  "description": "My brilliant Nuxt.js project",
+  "author": "xiongfeng",
+  "private": true,
+  "scripts": {
+    "dev": "cross-env NODE_ENV=development nodemon server/index.js --watch server --exec babel-node --presets @babel/env",
+    "build": "nuxt build",
+    "start": "cross-env NODE_ENV=production node server/index.js --exec babel-node --presets @babel/env",
+    "generate": "nuxt generate"
+  },
+  "dependencies": {
+    "@nuxtjs/axios": "^5.3.6",
+    "cross-env": "^5.2.0",
+    "element-ui": "^2.4.11",
+    "koa": "^2.6.2",
+    "nuxt": "^2.0.0"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.13.10",
+    "@babel/core": "^7.13.10",
+    "@babel/node": "^7.13.12",
+    "@babel/preset-env": "^7.13.12",
+    "node-sass": "^4.14.1",
+    "nodemon": "^1.18.9",
+    "sass-loader": "^7.3.1"
+  }
+}
