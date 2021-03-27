@@ -1,5 +1,5 @@
 <template>
-    <el-row :gutter="0" class="m-header">
+    <el-row :gutter="0">
   <el-col :span="6">
       <geo/>
   </el-col>
@@ -24,5 +24,4 @@ export default {
 
 <style lang="scss">
     @import "@/assets/css/public/layout.scss";
-    @import "@/assets/css/public/header.scss";
 </style>
