@@ -16,7 +16,7 @@ export default {
             return "343138759@qq.com";
         },
         get pass() {
-            return "jsmxfkqbhcavcabe";
+            return "123456789"; //你的邮箱授权码
         },
         get code() {
             return () => {
