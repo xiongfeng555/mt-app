@@ -14,7 +14,7 @@ router.post("/create", async ctx => {
         };
     } else { //当用户处于登录状态时
         let time = Date();
-        let cartNo = md5(Math.random() * 1000 + time).toString();
+        let cartNo = md5(Math.random() * 1000 + time).toString(); //生成一个属产品的id并返回给客户端
         let {
             params: { id, detail }
         } = ctx.request.body;
@@ -41,7 +41,6 @@ router.post('/getCart', async(ctx) => {
     let result = await Cart.findOne({
         cartNo: id
     })
-    console.log(result)
     if (result) {
         ctx.body = {
             code: 0,

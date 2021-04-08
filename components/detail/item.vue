@@ -37,7 +37,6 @@ export default {
   },
   methods: {
     createCart: async function () {
-      console.log(this.meta)
       let self = this;
       let {
         status,
