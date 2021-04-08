@@ -9,8 +9,8 @@ import axios from "./utils/axios";
 let router = new Router({
     prefix: "/users" //设置路由前缀
 });
-
-//新建redis客户端，用于存储用户名和密码
+console.log(User)
+    //新建redis客户端，用于存储用户名和密码
 let Store = new Redis().client;
 
 //注册

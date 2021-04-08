@@ -7,21 +7,21 @@
             <el-col :span="15" class="center">
                 <div class="wrapper">
                     <el-input placeholder="搜索商家和地点" v-model="search" @focus="focus" @blur="blur" @input="input"></el-input>
-                    <button class="el-button el-button--primary"><i class="el-icon-search"></i></button>
+                    <button class="el-button el-button--primary" @click="toProduct"><i class="el-icon-search"></i></button>
                     <dl class="hotPlace" v-show="isHotPlace">
                         <dt>热门搜索</dt>
-                        <dd v-for="(item,index) in hotPlaceList" :key="index">{{item}}</dd>
+                        <dd v-for="(item,index) in $store.state.home.hotPlace.slice(0,5)" :key="index">{{item.name}}</dd>
                     </dl>
                     <dl class="searchList" v-show="isSearchList">
-                        <dd v-for="(item,index) in searchList" :key="index+'s'">{{item}}</dd>
+                        <dd v-for="(item,index) in searchList" :key="index+'s'">{{item.name}}</dd>
                     </dl>
                 </div>
                 <p class="suggest">
-                    <a href="#">故宫博物院</a>
-                    <a href="#">故宫博物院</a>
-                    <a href="#">故宫博物院</a>
-                    <a href="#">故宫博物院</a>
-                    <a href="#">故宫博物院</a>
+                    <a href="/products">故宫博物院</a>
+                    <a href="/products">故宫博物院</a>
+                    <a href="/products">故宫博物院</a>
+                    <a href="/products">故宫博物院</a>
+                    <a href="/products">故宫博物院</a>
                 </p>
                 <ul class="nav">
                     <li>
@@ -52,13 +52,14 @@
     </div>
 </template>
 <script>
+import _ from 'lodash'
 export default {
     data() {
         return {
             search:'',
             isFocus:false,
             hotPlaceList:['天安门','毛主席'],
-            searchList:["火锅","鸡肉"]
+            searchList:[]
         }
     },
     computed:{
@@ -79,8 +80,20 @@ export default {
                 self.isFocus = false
             },200)
         },
-        input(){
-            //更新列表
+        input:_.debounce(async function(){
+            let self = this
+            let city = self.$store.state.geo.position.city.replace('市','')
+            self.searchList = ''
+            let {status,data:{top}} = await self.$axios.get('/search/top',{
+                params:{
+                    input:self.search,
+                    city
+                }
+            })
+            self.searchList = top
+        },300),
+        toProduct(){
+            window.location.href = '/products'
         }
     },
 }

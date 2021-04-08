@@ -1,6 +1,7 @@
 <template>
   <section class="m-istyle">
-    <dl @mouseover="over">
+    <!-- @mouseover="over" -->
+    <dl>
       <dt>有格调</dt>
       <dd
         :class="{active:kind==='all'}"

@@ -18,21 +18,7 @@ export default {
     data() {
         return {
             kind:'',
-            menu:[{
-                type:'food',
-                name:'美食',
-                child:[{
-                    title:'美食',
-                    child:['代金券','火锅']
-                }]
-            },{
-                type:'takeout',
-                name:'外卖',
-                child:[{
-                    title:'外卖',
-                    child:['代金券','火锅']
-                }]
-            }]
+            menu:[]
         }
     },
     computed:{
@@ -58,6 +44,9 @@ export default {
     sout(){ // 鼠标离开细节层
         this.kind = ''
     }
-    }
+    },
+    created() {
+        this.menu = this.$store.state.home.menu
+    },
 }
 </script>
