@@ -14,11 +14,11 @@
       class="m-categroy-section">
       <dt :id="'city-'+item.title">{{ item.title }}</dt>
       <dd>
-        <a href="#" @click.prevent="toChangeCity(item)">
+        <nuxt-link to="/">
           <span
           v-for="(c,index) in item.city"
-          :key="index">{{ c }}</span>
-        </a>
+          :key="index" @click="toChangeCity(c)">{{ c }}</span>
+        </nuxt-link>
       </dd>
     </dl>
   </div>
@@ -63,8 +63,8 @@ export default {
   },
   methods: {
     toChangeCity(city){
+      console.log(city)
       this.$store.commit('geo/setCity',city)
-      window.location.href = '/'
     }
   },
 }

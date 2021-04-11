@@ -1,17 +1,17 @@
 import passport from "koa-passport";
 import LocalStrategy from "passport-local";
 import UserModel from "../../dbs/models/users";
-passport.use(
+passport.use( //制定本地验证策略
     new LocalStrategy(async function(username, password, done) {
         let where = {
             username
         };
-        let result = await UserModel.findOne({
+        let user = await UserModel.findOne({
             username
         });
-        if (result !== null) {
-            if (result.password === password) {
-                return done(null, result);
+        if (user !== null) {
+            if (user.password === password) {
+                return done(null, user);
             } else {
                 return done(null, false, "密码错误");
             }

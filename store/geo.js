@@ -7,7 +7,6 @@ const mutations = {
         state.position = val
     },
     setCity(state, val) {
-        console.log(110)
         state.position.city = val
     }
 }

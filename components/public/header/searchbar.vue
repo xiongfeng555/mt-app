@@ -17,11 +17,11 @@
                     </dl>
                 </div>
                 <p class="suggest">
-                    <a href="/products">故宫博物院</a>
-                    <a href="/products">故宫博物院</a>
-                    <a href="/products">故宫博物院</a>
-                    <a href="/products">故宫博物院</a>
-                    <a href="/products">故宫博物院</a>
+                    <nuxt-link to="/products">菜单列表</nuxt-link>
+                    <nuxt-link to="/products">菜单列表</nuxt-link>
+                    <nuxt-link to="/products">菜单列表</nuxt-link>
+                    <nuxt-link to="/products">菜单列表</nuxt-link>
+                    <nuxt-link to="/products">菜单列表</nuxt-link>
                 </p>
                 <ul class="nav">
                     <li>

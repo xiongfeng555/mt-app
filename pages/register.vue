@@ -63,7 +63,7 @@ import CryptoJS from 'crypto-js'
         rules: { //验证规则制定
           name: [
             { required: true, message: '请输入昵称', trigger: 'blur', type: 'string' },
-            { min: 3, max: 8, message: '长度在 3 到 8 个字符', trigger: 'blur' }
+            { min: 1, max: 8, message: '长度在 3 到 8 个字符', trigger: 'blur' }
           ],
           email: [
             { required: true, message: '请输入邮箱', trigger: 'blur', type: 'email' }
@@ -74,6 +74,7 @@ import CryptoJS from 'crypto-js'
           cpwd: [
             {  required: true, message: '请再次输入密码', trigger: 'blur' },
             {
+              //验证规则
               validator: (rule, value, callback) => {
                 if (value === '') {
                   callback(new Error('请再次输入密码'))
@@ -97,19 +98,20 @@ import CryptoJS from 'crypto-js'
         let emailPass
         self.statusMsg = ''
         if(this.timerid){
-          console.log(this.timerid)
-          console.log('false')
           return false
         }
+        //校验用户名准确性
         this.$refs['ruleForm'].validateField('name',(valid)=>{
           namePass = valid
         })
         if(namePass){
           return false
         }
+        //校验邮箱有效性
         this.$refs['ruleForm'].validateField('email',(valid)=>{
           emailPass = valid
         })
+        //如果用户名和邮箱正确，向后台请求数据
         if(!namePass && !emailPass){
           axios.post('/users/verify',{
             username:self.ruleForm.name,
@@ -120,7 +122,7 @@ import CryptoJS from 'crypto-js'
               self.statusMsg = `验证码已发送，剩余${count--}秒`
               self.timerid = setInterval(function(){
                 self.statusMsg = `验证码已发送，剩余${count--}秒`
-                if(count ===0){
+                if(count === 0){
                   clearInterval(self.timerid)
                   self.timerid = false
                   self.statusMsg = ''
@@ -135,13 +137,13 @@ import CryptoJS from 'crypto-js'
       //同意并注册
       register () {
         let self = this
-        this.$refs['ruleForm'].validate((valid)=>{
+        this.$refs['ruleForm'].validate((valid)=>{//所有的格式和内容都正确
           if(valid){
             axios.post('/users/signup',{
-              username:self.ruleForm.name,
-              password:CryptoJS.MD5(self.ruleForm.pwd).toString(),
-              email:self.ruleForm.email,
-              code:self.ruleForm.code
+              username:self.ruleForm.name,//用户名
+              password:CryptoJS.MD5(self.ruleForm.pwd).toString(),//经过md5加密的密码
+              email:self.ruleForm.email,//邮箱
+              code:self.ruleForm.code //验证码
               
             }).then(({status,data})=>{
               if(status===200){

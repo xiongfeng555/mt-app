@@ -4,7 +4,7 @@
             <li class="list">
                 <nuxt-link to="/my">我的美团</nuxt-link>
                 <dl>
-                    <dd><nuxt-link to="/myorder">我的订单</nuxt-link></dd>
+                    <dd><nuxt-link to="/order">我的订单</nuxt-link></dd>
                     <dd><nuxt-link to="/myorder">我的收藏</nuxt-link></dd>
                     <dd><nuxt-link to="/myorder">抵用券</nuxt-link></dd>
                     <dd><nuxt-link to="/myorder">账户设置</nuxt-link></dd>

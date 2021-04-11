@@ -17,11 +17,20 @@
 // }
 export const actions = {
     async nuxtServerInit({ commit }, { req, app }) {
-        let { status, data: { city, province } } = await app.$axios.get('/geo/getPosition')
-        commit("geo/setPosition", { city, province })
-        let result = await app.$axios.get('/geo/menu')
+        //获取地理位置信息
+        let {
+            status,
+            data: { city, province }
+        } = await app.$axios.get("/geo/getPosition");
+        commit("geo/setPosition", { city, province });
+        //获取菜单
+        let result = await app.$axios.get("/geo/menu");
         commit("home/setMenu", result.data.menu.menu);
-        let { status: status2, data: { search } } = await app.$axios.get('/search/hotSearch')
-        commit('home/setHotPlace', search)
+        //获取热门搜索信息
+        let {
+            status: status2,
+            data: { search }
+        } = await app.$axios.get("/search/hotSearch");
+        commit("home/setHotPlace", search);
     }
-}
+};

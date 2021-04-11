@@ -46,6 +46,7 @@ export default {
     //监听省份值得变化，根据值去取城市的数据
     pvalue:async function(newPvalue){
       let self=this;
+      //根据省份id获取对应的城市列表
       let {status,data:{city:{value}}} =await self.$axios.get(`/geo/province/${newPvalue}`)
       if(status===200){
         self.city=value.map(item=>{
@@ -61,10 +62,9 @@ export default {
   },
   mounted:async function(){
     let self=this;
+    //获取省份
     let {status,data:{province}}=await self.$axios.get('/geo/province')
-
     if(status===200){
-
       self.province=province.map(item=>{
         return {
           value:item.id,
@@ -80,15 +80,13 @@ export default {
       //城市列表中查找输入的值
       if(self.cities.length){ 
         cb(self.cities.filter(item => item.value.indexOf(query)>-1))
-      }else{
-        
+      }else{  
         let {status,data:{city}}=await self.$axios.get('/geo/city')
         city = city.map(item => {
                 return {
                     value: item.name
                 }
             }
-
         )
         if(status===200){
           self.cities = city
